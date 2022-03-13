@@ -5,10 +5,14 @@ const again = document.querySelector(".btn__again");
 let score = 20;
 let highScore = 0;
 
+function displayMessage(message) {
+  document.querySelector(".message").textContent = message;
+}
+
 again.addEventListener("click", () => {
   score = 20;
   secretNum = Math.trunc(Math.random() * 20) + 1;
-  document.querySelector(".message").textContent = "Start guessing...";
+  displayMessage("Start guessing...");
   document.querySelector(".score").textContent = score;
   document.querySelector(".number").textContent = "?";
   document.body.style.background = "#333";
@@ -20,10 +24,10 @@ check.addEventListener("click", () => {
   const guess = Number(document.querySelector(".guess").value);
   // When there is no input
   if (!guess) {
-    document.querySelector(".message").textContent = "⛔️  No number";
+    displayMessage("⛔️  No number");
     // When player wins
   } else if (guess === secretNum) {
-    document.querySelector(".message").textContent = "🎉  Correct number!";
+    displayMessage("🎉  Correct number!");
     document.querySelector(".number").textContent = secretNum;
     document.body.style.background = "#60b347";
     document.querySelector(".number").style.width = "30rem";
@@ -33,24 +37,14 @@ check.addEventListener("click", () => {
       document.querySelector(".highscore").textContent = highScore;
     }
 
-    // When guess is too high
-  } else if (guess > secretNum) {
+    // When guess is wrong
+  } else if (guess !== secretNum) {
     if (score > 1) {
-      document.querySelector(".message").textContent = "📈 Too high!";
+      displayMessage(guess > secretNum ? "📈 Too high!" : "📉 Too low!");
       score--;
       document.querySelector(".score").textContent = score;
     } else {
-      document.querySelector(".message").textContent = "You lost the game";
-      document.querySelector(".score").textContent = 0;
-    }
-    // When guess is too low
-  } else if (guess < secretNum) {
-    if (score > 1) {
-      document.querySelector(".message").textContent = "📉 Too low!";
-      score--;
-      document.querySelector(".score").textContent = score;
-    } else {
-      document.querySelector(".message").textContent = "You lost the game";
+      displayMessage("You lost the game");
       document.querySelector(".score").textContent = 0;
     }
   }
