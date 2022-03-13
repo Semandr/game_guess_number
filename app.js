@@ -12,6 +12,8 @@ check.addEventListener("click", () => {
     // When player wins
   } else if (guess === secretNum) {
     document.querySelector(".message").textContent = "🎉  Correct number!";
+    document.body.style.background = "#60b347";
+    document.querySelector(".number").style.width = "30rem";
     // When guess is too high
   } else if (guess > secretNum) {
     if (score > 1) {
