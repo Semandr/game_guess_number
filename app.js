@@ -5,9 +5,11 @@ const again = document.querySelector(".btn__again");
 let score = 20;
 
 again.addEventListener("click", () => {
-  document.querySelector(".score").textContent = 20;
-  document.querySelector(".number").textContent = "?";
+  score = 20;
+  secretNum = Math.trunc(Math.random() * 20) + 1;
   document.querySelector(".message").textContent = "Start guessing...";
+  document.querySelector(".score").textContent = score;
+  document.querySelector(".number").textContent = "?";
   document.body.style.background = "#333";
   document.querySelector(".guess").value = "";
   document.querySelector(".number").style.width = "15rem";
