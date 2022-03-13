@@ -1,8 +1,17 @@
 "use strict";
-const secretNum = Math.trunc(Math.random() * 20) + 1;
+let secretNum = Math.trunc(Math.random() * 20) + 1;
 const check = document.querySelector(".btn__check");
+const again = document.querySelector(".btn__again");
 let score = 20;
-document.querySelector(".number").textContent = secretNum;
+
+again.addEventListener("click", () => {
+  document.querySelector(".score").textContent = 20;
+  document.querySelector(".number").textContent = "?";
+  document.querySelector(".message").textContent = "Start guessing...";
+  document.body.style.background = "#333";
+  document.querySelector(".guess").value = "";
+  document.querySelector(".number").style.width = "15rem";
+});
 
 check.addEventListener("click", () => {
   const guess = Number(document.querySelector(".guess").value);
@@ -12,6 +21,7 @@ check.addEventListener("click", () => {
     // When player wins
   } else if (guess === secretNum) {
     document.querySelector(".message").textContent = "🎉  Correct number!";
+    document.querySelector(".number").textContent = secretNum;
     document.body.style.background = "#60b347";
     document.querySelector(".number").style.width = "30rem";
     // When guess is too high
